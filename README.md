@@ -18,6 +18,14 @@ Bring **Wallpaper Engine**-style live wallpapers to Linux! This project allows y
 
 > ⚠️ This is an educational project that evolved into a functional OpenGL-based wallpaper engine for Linux. Expect some limitations and quirks!
 
+> [!NOTE]
+> **Active Maintenance Fork (`Azteriisk/linux-wallpaperengine`)**:
+> This fork includes critical performance and stability fixes for Wayland:
+> - **Multi-monitor frame pacing**: EGL swap interval 0 eliminates 30 FPS capping and double-vsync judder on mismatched refresh rate displays.
+> - **Non-blocking MPV video rendering**: Avoids serializing multi-monitor presentation clocks on video timestamps.
+> - **Clean layer surface exit**: Shuts down cleanly on compositor layer close events.
+> - **Thread & audio resource leak fixes**: Suppresses unneeded mpv Lua runtime threads and disables audio output loops when muted.
+
 ---
 
 ## 📦 System Requirements
