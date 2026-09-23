@@ -1,6 +1,7 @@
 #include "GLPlayer.h"
 
 #include "WallpaperEngine/Logging/Log.h"
+#include "WallpaperEngine/Application/WallpaperApplication.h"
 
 #include <mpv/render_gl.h>
 #include <mpv/stream_cb.h>
@@ -224,6 +225,19 @@ void GLPlayer::init () {
     mpv_set_option_string (this->m_handle, "input-cursor", "no");
     mpv_set_option_string (this->m_handle, "cursor-autohide", "no");
     mpv_set_option_string (this->m_handle, "config", "no");
+    // Disable Lua script engine (ytdl, console, stats) to prevent leaking ~8 threads per output
+    mpv_set_option_string (this->m_handle, "load-scripts", "no");
+    mpv_set_option_string (this->m_handle, "ytdl", "no");
+    mpv_set_option_string (this->m_handle, "load-console", "no");
+    mpv_set_option_string (this->m_handle, "load-stats-overlay", "no");
+    mpv_set_option_string (this->m_handle, "load-auto-profiles", "no");
+    mpv_set_option_string (this->m_handle, "osc", "no");
+
+    const auto& audioSettings = this->getContext ().getApp ().getContext ().settings.audio;
+    if (!audioSettings.enabled || audioSettings.volume == 0 || this->m_muted) {
+        mpv_set_option_string (this->m_handle, "audio", "no");
+        mpv_set_option_string (this->m_handle, "ao", "null");
+    }
     mpv_set_option_string (this->m_handle, "fbo-format", "rgba8");
     mpv_set_option_string (this->m_handle, "vo", "libmpv");
     mpv_set_option_string (this->m_handle, "profile", "fast");
