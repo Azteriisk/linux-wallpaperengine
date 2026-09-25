@@ -12,7 +12,9 @@ depends=('lz4' 'ffmpeg' 'mpv' 'glfw' 'glew' 'freeglut' 'libpulse' 'libcups' 'at-
 makedepends=('git' 'cmake' 'sdl2' 'glm' 'wayland-protocols' 'xorg-xrandr')
 provides=("linux-wallpaperengine")
 conflicts=("linux-wallpaperengine")
-source=("${pkgname}::git+https://github.com/Azteriisk/linux-wallpaperengine.git#branch=main")
+
+_commit="1294beb8cfd98e10a4b7a0cb0d6a3a47e31d6e12"
+source=("${pkgname}::git+https://github.com/Azteriisk/linux-wallpaperengine.git#branch=main#commit=${_commit}")
 sha512sums=('SKIP')
 
 pkgver() {
