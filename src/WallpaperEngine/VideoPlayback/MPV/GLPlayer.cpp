@@ -180,6 +180,7 @@ void GLPlayer::render () const {
 				  { MPV_RENDER_PARAM_INVALID, nullptr } };
 
     mpv_render_context_render (this->m_renderContext, params);
+    mpv_render_context_report_swap (this->m_renderContext);
 }
 
 int GLPlayer::getWidth () const { return this->m_width; }
